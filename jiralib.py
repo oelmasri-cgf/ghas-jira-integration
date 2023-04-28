@@ -98,6 +98,14 @@ class Jira:
         resp.raise_for_status()
 
         return resp.json()
+    
+    def attach_file(self, issue_key, fname, state):
+        state_file_path =  "./" + fname
+        util.state_to_file(state_file_path,state)
+        with open(state_file_path, 'rb') as f:
+            self.j.add_attachment(issue=issue_key, attachment=f)
+        
+        
 
 
 class JiraProject:
@@ -162,8 +170,7 @@ class JiraProject:
 
         # attach the new state file
         self.jira.attach_file(
-            i.key, repo_id_to_fname(repo_id), util.state_to_json(state)
-        )
+            i.key, repo_id_to_fname(repo_id), state)
 
     def create_issue(
         self,
