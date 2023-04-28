@@ -79,7 +79,7 @@ class Sync:
         # make sure alert and issue are in the same state
         if self.direction & DIRECTION_G2J and self.direction & DIRECTION_J2G:
             d = in_direction
-        elif in_directon & DIRECTION_J2G and self.direction & DIRECTION_G2J: 
+        elif in_direction & DIRECTION_J2G and self.direction & DIRECTION_G2J: 
             # condition: when the sync is set up in G2J direction abd the sync is called for J2G based on the state of the alert not changing
             # no action required since the state did not change
             return alert.get_state()
